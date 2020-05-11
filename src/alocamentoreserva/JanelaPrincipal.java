@@ -117,7 +117,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioCadastrarMenuItemActionPerformed
 
     private void usuarioBuscarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioBuscarMenuItemActionPerformed
-        trocarPainel(new UsuarioBuscarPainel());
+        trocarPainel(new ProfessorBuscarPainel());
     }//GEN-LAST:event_usuarioBuscarMenuItemActionPerformed
 
     private void reservaCadastrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservaCadastrarMenuItemActionPerformed

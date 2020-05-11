@@ -18,8 +18,8 @@ import java.util.logging.Logger;
  * @author admin
  */
 public class ReservaCadastrarPainel extends javax.swing.JPanel {
-    List<Usuario> usuarios = new ArrayList<>();
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    List<Professor> usuarios = new ArrayList<>();
+    ProfessorDAO usuarioDAO = new ProfessorDAO();
     Reserva reserva = new Reserva();
     ReservaDAO reservaDAO = new ReservaDAO();
     /**
@@ -31,7 +31,7 @@ public class ReservaCadastrarPainel extends javax.swing.JPanel {
         try {
             usuarios = usuarioDAO.findAll();
             
-            for(Usuario usuario : usuarios){
+            for(Professor usuario : usuarios){
                 usuarioComboBox.addItem(usuario);
             }
         } catch (ConexaoException ex) {
@@ -165,7 +165,7 @@ public class ReservaCadastrarPainel extends javax.swing.JPanel {
         try {
             
             reserva.dataHorarioIni = sdf.parse(dataInicialTextField.getText());
-            reserva.usuario = (Usuario) usuarioComboBox.getSelectedItem();
+            reserva.usuario = (Professor) usuarioComboBox.getSelectedItem();
             
             reservaDAO.inserir(reserva);
         } catch (ParseException ex) {
@@ -194,6 +194,6 @@ public class ReservaCadastrarPainel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JComboBox<Usuario> usuarioComboBox;
+    private javax.swing.JComboBox<Professor> usuarioComboBox;
     // End of variables declaration//GEN-END:variables
 }

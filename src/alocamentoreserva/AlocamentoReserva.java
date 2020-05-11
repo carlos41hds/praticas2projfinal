@@ -20,7 +20,32 @@ public class AlocamentoReserva {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        main9();
+        main11();
+    }
+    
+    public static void main11(){
+        AdministradorDAO administradorDAO = new AdministradorDAO();
+        List<Administrador> administradors = administradorDAO.findByUsernameAndPassword("carloshenrique222", "123123qwqw");
+        if(administradors.size() == 1){
+            System.out.println("Sucesso!");
+        } else {
+            System.out.println("ERRO!");
+        }
+    }
+    
+    public static void main10(){
+        Administrador administrador = new Administrador();
+        
+        administrador.nome = "Carlos Henrique Labatut da Silva";
+        administrador.nomeDeUsuario = "carloshenrique222";
+        administrador.senha = "123123qwqw";
+        
+        AdministradorDAO administradorDAO = new AdministradorDAO();
+        try {
+            administradorDAO.inserir(administrador);
+        } catch (ConexaoException ex) {
+            Logger.getLogger(AlocamentoReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void main9(){
@@ -39,10 +64,10 @@ public class AlocamentoReserva {
     }
     
     public static void main8(){
-        Usuario usuario = new Usuario();
+        Professor usuario = new Professor();
         usuario.nome = "Kevin";
         System.out.println(usuario.toString());
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        ProfessorDAO usuarioDAO = new ProfessorDAO();
         try {
             usuarioDAO.inserir(usuario);
         } catch (ConexaoException ex) {
@@ -58,9 +83,9 @@ public class AlocamentoReserva {
     }
     
     public static void main1(){
-        Usuario usuario = new Usuario();
+        Professor usuario = new Professor();
         usuario.nome = "Juliane";
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        ProfessorDAO usuarioDAO = new ProfessorDAO();
         try {
             usuarioDAO.inserir(usuario);
         } catch (ConexaoException ex) {
@@ -69,10 +94,10 @@ public class AlocamentoReserva {
     }
     
     public static void main5(){
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        ProfessorDAO usuarioDAO = new ProfessorDAO();
         try {
-            List<Usuario> usuarios = usuarioDAO.findAll();
-            for(Usuario usuario : usuarios){
+            List<Professor> usuarios = usuarioDAO.findAll();
+            for(Professor usuario : usuarios){
                 System.out.println(usuario.id);
                 System.out.println(usuario.nome);
             }

@@ -9,9 +9,10 @@ package alocamentoreserva;
  *
  * @author admin
  */
-public class Usuario {
+public class Professor {
     int id;
     String nome;
+    String codigoBarras;
 
     public String toStringFull() {
         String usuarioString = "";

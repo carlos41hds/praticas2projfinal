@@ -46,11 +46,11 @@ create table reserva (
 	data_horario_ini datetime,
 	data_horario_fim datetime,
 	
-	usuario_id int,
+	professor_id int,
 	ambiente_id int,
 	
 	primary key (id),
 	
-	foreign key (usuario_id) references usuario (id),
+	foreign key (professor_id) references professor (id),
 	foreign key (ambiente_id) references ambiente (id)
 );

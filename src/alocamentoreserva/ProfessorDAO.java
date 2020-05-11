@@ -17,17 +17,17 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class UsuarioDAO {
+public class ProfessorDAO {
     String sql;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
-    Usuario dto;
+    Professor dto;
     
-    Usuario usuarioResultado;
-    List<Usuario> usuarioResultados;
+    Professor usuarioResultado;
+    List<Professor> usuarioResultados;
     
-    public void inserir(Usuario usuario) throws conexao.ConexaoException{
+    public void inserir(Professor usuario) throws conexao.ConexaoException{
         try {
             sql = "insert into usuario (nome) values (?);";
             
@@ -37,11 +37,11 @@ public class UsuarioDAO {
             
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public List<Usuario> findAll() throws conexao.ConexaoException{
+    public List<Professor> findAll() throws conexao.ConexaoException{
         try {
             sql = "select * from usuario order by id;";
 
@@ -57,7 +57,7 @@ public class UsuarioDAO {
         return null;
     }
     
-    public List<Usuario> findLast() throws conexao.ConexaoException{
+    public List<Professor> findLast() throws conexao.ConexaoException{
         try {
             sql = "select * from usuario order by id desc limit 1;";
 
@@ -73,17 +73,17 @@ public class UsuarioDAO {
         return null;
     }
     
-    private List<Usuario> carregarMultiplosResultados(ResultSet rs) throws SQLException{
-        List<Usuario> resultList = new ArrayList<>();
+    private List<Professor> carregarMultiplosResultados(ResultSet rs) throws SQLException{
+        List<Professor> resultList = new ArrayList<>();
         while (rs.next()) {
-            dto = new Usuario();
+            dto = new Professor();
             carregarVO(dto, rs);
             resultList.add(dto);
         }
         return resultList;
     }
     
-    private Usuario carregarResultadoSimples(ResultSet rs) throws SQLException{
+    private Professor carregarResultadoSimples(ResultSet rs) throws SQLException{
         if (rs.next()) {
             dto = new Cliente();
             carregarVO(dto, rs);
@@ -94,7 +94,7 @@ public class UsuarioDAO {
         }
     }
     
-    private void carregarVO(Usuario dto, ResultSet rs)throws SQLException{
+    private void carregarVO(Professor dto, ResultSet rs)throws SQLException{
         dto.id = rs.getInt("id");
         dto.nome = rs.getString("nome");
     }

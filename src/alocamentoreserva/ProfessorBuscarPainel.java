@@ -19,13 +19,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class UsuarioBuscarPainel extends javax.swing.JPanel {
-    List<Usuario> usuarios = new ArrayList<>();
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
+public class ProfessorBuscarPainel extends javax.swing.JPanel {
+    List<Professor> usuarios = new ArrayList<>();
+    ProfessorDAO usuarioDAO = new ProfessorDAO();
     /**
      * Creates new form VendaBuscarData
      */
-    public UsuarioBuscarPainel() {
+    public ProfessorBuscarPainel() {
         initComponents();
     }
 
@@ -109,14 +109,14 @@ public class UsuarioBuscarPainel extends javax.swing.JPanel {
             DefaultTableModel model = (DefaultTableModel) usuarioTable.getModel();
             model.setRowCount(0);
 
-            for(Usuario usuario : usuarios){
+            for(Professor usuario : usuarios){
                 model.addRow(new Object[]{
                         usuario.id,
                         usuario.nome,
                 });
             } 
         } catch (ConexaoException ex) {
-            Logger.getLogger(UsuarioBuscarPainel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProfessorBuscarPainel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_pesquisarBtActionPerformed
 

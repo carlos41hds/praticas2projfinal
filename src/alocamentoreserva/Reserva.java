@@ -17,7 +17,7 @@ public class Reserva {
     Date dataHorarioIni;
     Date dataHorarioFim;
     
-    Usuario usuario;
+    Professor usuario;
     Ambiente ambiente;
 
     // TODO: Implementar ambiente

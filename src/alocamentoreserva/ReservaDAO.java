@@ -50,7 +50,7 @@ public class ReservaDAO {
         }
     }
     
-    public List<Usuario> findAll() throws conexao.ConexaoException{
+    public List<Professor> findAll() throws conexao.ConexaoException{
         try {
             sql = "select * from usuario order by id;";
 
@@ -93,7 +93,7 @@ public class ReservaDAO {
         return resultList;
     }
     
-    private void carregarVO(Usuario dto, ResultSet rs)throws SQLException{
+    private void carregarVO(Professor dto, ResultSet rs)throws SQLException{
         dto.id = rs.getInt("id");
         dto.nome = rs.getString("nome");
     }
@@ -102,7 +102,7 @@ public class ReservaDAO {
         dto.id = rs.getInt("reserva.id");
         Date dataUtil = new java.util.Date(rs.getDate("reserva.data_horario_ini").getTime());
         dto.dataHorarioIni = dataUtil;
-        dto.usuario = new Usuario();
+        dto.usuario = new Professor();
         dto.usuario.id = rs.getInt("usuario.id");
         dto.usuario.nome = rs.getString("usuario.nome");
     }

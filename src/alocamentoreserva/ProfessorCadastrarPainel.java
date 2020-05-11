@@ -9,12 +9,12 @@ package alocamentoreserva;
  *
  * @author admin
  */
-public class UsuarioCadastrarPainel extends javax.swing.JPanel {
+public class ProfessorCadastrarPainel extends javax.swing.JPanel {
 
     /**
      * Creates new form UsuarioPainel
      */
-    public UsuarioCadastrarPainel() {
+    public ProfessorCadastrarPainel() {
         initComponents();
     }
 
