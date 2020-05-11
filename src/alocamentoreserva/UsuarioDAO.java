@@ -8,6 +8,7 @@ package alocamentoreserva;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,5 +39,63 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public List<Usuario> findAll() throws conexao.ConexaoException{
+        try {
+            sql = "select * from usuario order by id;";
+
+            stmt = conexao.Conexao.getCon().prepareStatement(sql);
+            
+            rs = stmt.executeQuery();
+            
+            return carregarMultiplosResultados(rs);
+        }catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+        } 
+        
+        return null;
+    }
+    
+    public List<Usuario> findLast() throws conexao.ConexaoException{
+        try {
+            sql = "select * from usuario order by id desc limit 1;";
+
+            stmt = conexao.Conexao.getCon().prepareStatement(sql);
+            
+            rs = stmt.executeQuery();
+            
+            return carregarMultiplosResultados(rs);
+        }catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+        } 
+        
+        return null;
+    }
+    
+    private List<Usuario> carregarMultiplosResultados(ResultSet rs) throws SQLException{
+        List<Usuario> resultList = new ArrayList<>();
+        while (rs.next()) {
+            dto = new Usuario();
+            carregarVO(dto, rs);
+            resultList.add(dto);
+        }
+        return resultList;
+    }
+    
+    private Usuario carregarResultadoSimples(ResultSet rs) throws SQLException{
+        if (rs.next()) {
+            dto = new Cliente();
+            carregarVO(dto, rs);
+            
+            return dto;
+        }else{
+            return null;
+        }
+    }
+    
+    private void carregarVO(Usuario dto, ResultSet rs)throws SQLException{
+        dto.id = rs.getInt("id");
+        dto.nome = rs.getString("nome");
     }
 }

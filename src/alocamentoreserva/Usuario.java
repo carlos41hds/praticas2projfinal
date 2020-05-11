@@ -12,4 +12,16 @@ package alocamentoreserva;
 public class Usuario {
     int id;
     String nome;
+
+    @Override
+    public String toString() {
+        String usuarioString = "";
+        
+        usuarioString += "Id: " + id + "\n";
+        usuarioString += "Nome: " + nome + "\n";
+        
+        return usuarioString;
+    }
+    
+    
 }

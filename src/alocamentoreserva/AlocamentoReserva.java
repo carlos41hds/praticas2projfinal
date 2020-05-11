@@ -6,6 +6,7 @@
 package alocamentoreserva;
 
 import conexao.ConexaoException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,15 +20,57 @@ public class AlocamentoReserva {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        main3();
+        main8();
+    }
+    
+    public static void main7(){
+        ReservaDAO reservaDAO = new ReservaDAO();
+        try {
+            Reserva reserva = reservaDAO.findLastWithUsuario().get(0);
+            System.out.println(reserva);
+        } catch (ConexaoException ex) {
+            Logger.getLogger(AlocamentoReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void main8(){
+        Usuario usuario = new Usuario();
+        usuario.nome = "Kevin";
+        System.out.println(usuario.toString());
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        try {
+            usuarioDAO.inserir(usuario);
+        } catch (ConexaoException ex) {
+            Logger.getLogger(AlocamentoReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            usuario = usuarioDAO.findLast().get(0); // recebe uma lista por isso que tem que pegar o 0
+            System.out.println(usuario);
+        } catch (ConexaoException ex) {
+            Logger.getLogger(AlocamentoReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void main1(){
         Usuario usuario = new Usuario();
-        usuario.nome = "Carlos";
+        usuario.nome = "Juliane";
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         try {
             usuarioDAO.inserir(usuario);
+        } catch (ConexaoException ex) {
+            Logger.getLogger(AlocamentoReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void main5(){
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        try {
+            List<Usuario> usuarios = usuarioDAO.findAll();
+            for(Usuario usuario : usuarios){
+                System.out.println(usuario.id);
+                System.out.println(usuario.nome);
+            }
         } catch (ConexaoException ex) {
             Logger.getLogger(AlocamentoReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -63,5 +106,6 @@ public class AlocamentoReserva {
             Logger.getLogger(AlocamentoReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
 }

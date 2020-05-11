@@ -19,4 +19,22 @@ public class Reserva {
     
     Usuario usuario;
     Ambiente ambiente;
+
+    // TODO: Implementar ambiente
+    @Override
+    public String toString() {
+        String reservaString = "";
+        
+        reservaString += "Id: " + id + "\n";
+        if(dataHorarioIni != null)
+            reservaString += "Data-horário inicial: " + dataHorarioIni.toString() + "\n";
+        if(dataHorarioFim != null)
+            reservaString += "Data-horário final: " + dataHorarioFim.toString() + "\n";
+        reservaString += "Usuario: " + "\n";
+        reservaString += usuario.toString();
+        
+        return reservaString;
+    }
+    
+    
 }
