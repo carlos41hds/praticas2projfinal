@@ -1,0 +1,30 @@
+create database ifsc_praticas2;
+
+use ifsc_praticas2;
+
+create table usuario (
+	id int,
+	nome varchar(20),
+	
+	primary key (id)
+);
+
+create table ambiente (
+	id int,
+	codigo varchar(5),
+	
+	primary key (id)
+);
+
+create table reserva (
+	id int,
+	data_horario_ini datetime,
+	data_horario_fim datetime,
+	usuario_id int,
+	ambiente_id int,
+	
+	primary key (id),
+	foreign key (usuario_id) references usuario (id),
+	foreign key (ambiente_id) references ambiente (id)
+);
+
