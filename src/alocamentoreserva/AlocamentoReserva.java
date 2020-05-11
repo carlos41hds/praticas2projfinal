@@ -20,7 +20,12 @@ public class AlocamentoReserva {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        main8();
+        main9();
+    }
+    
+    public static void main9(){
+        JanelaPrincipal jp = new JanelaPrincipal();
+        jp.setVisible(true);
     }
     
     public static void main7(){
@@ -92,7 +97,7 @@ public class AlocamentoReserva {
 
         java.text.SimpleDateFormat sdf = 
              new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+        
         String currentTime = sdf.format(dt);
     
         Reserva reserva = new Reserva();

@@ -13,8 +13,7 @@ public class Usuario {
     int id;
     String nome;
 
-    @Override
-    public String toString() {
+    public String toStringFull() {
         String usuarioString = "";
         
         usuarioString += "Id: " + id + "\n";
@@ -22,6 +21,9 @@ public class Usuario {
         
         return usuarioString;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

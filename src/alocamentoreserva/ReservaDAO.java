@@ -42,7 +42,7 @@ public class ReservaDAO {
             
             stmt.setString(1, dataHorarioIniString);
             
-            stmt.setInt(2, 1);
+            stmt.setInt(2, reserva.usuario.id);
             
             stmt.executeUpdate();
         } catch (SQLException ex) {
