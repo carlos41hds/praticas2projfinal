@@ -3,23 +3,27 @@ create database ifsc_praticas2;
 use ifsc_praticas2;
 
 create table usuario (
-	id int,
+	id int auto_increment,
+	
 	nome varchar(20),
 	
 	primary key (id)
 );
 
 create table ambiente (
-	id int,
+	id int auto_increment,
+	
 	codigo varchar(5),
 	
 	primary key (id)
 );
 
 create table reserva (
-	id int,
+	id int auto_increment,
+	
 	data_horario_ini datetime,
 	data_horario_fim datetime,
+	
 	usuario_id int,
 	ambiente_id int,
 	
