@@ -124,7 +124,7 @@ public class AdministradorDAO {
     private List<Administrador> carregarMultiplosResultados(ResultSet rs) throws SQLException{
         List<Administrador> resultList = new ArrayList<>();
         while (rs.next()) {
-            dto = new Administrador();
+            dto = Administrador.getInstanceTemp();
             carregarVO(dto, rs);
             resultList.add(dto);
         }

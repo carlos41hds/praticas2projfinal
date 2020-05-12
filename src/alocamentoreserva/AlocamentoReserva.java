@@ -34,7 +34,7 @@ public class AlocamentoReserva {
     }
     
     public static void main10(){
-        Administrador administrador = new Administrador();
+        Administrador administrador = Administrador.getInstance();
         
         administrador.nome = "Carlos Henrique Labatut da Silva";
         administrador.nomeDeUsuario = "carloshenrique222";
