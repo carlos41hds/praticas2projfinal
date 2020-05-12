@@ -41,6 +41,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         painelPrincipal = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -50,8 +51,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         reservaCadastrarMenuItem = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +99,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.add(jMenu5);
 
+        jMenu6.setText("Conta");
+
+        jMenuItem2.setText("Alterar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
+
+        jMenu1.add(jMenu6);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -124,6 +141,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         trocarPainel(new ReservaCadastrarPainel());
     }//GEN-LAST:event_reservaCadastrarMenuItemActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        trocarPainel(new ContaAdministradorPainel());
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void vendaCadastrarBtActionPerformedOrFail(java.awt.event.ActionEvent evt) {                                                 
     }
     
@@ -133,7 +155,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel painelPrincipal;
     private javax.swing.JMenuItem reservaCadastrarMenuItem;
     private javax.swing.JMenuItem usuarioBuscarMenuItem;

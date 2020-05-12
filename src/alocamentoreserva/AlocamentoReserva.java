@@ -20,7 +20,12 @@ public class AlocamentoReserva {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        main11();
+        main12();
+    }
+    
+    public static void main12(){
+        JanelaLogin jl = new JanelaLogin();
+        jl.setVisible(true);
     }
     
     public static void main11(){
@@ -28,6 +33,7 @@ public class AlocamentoReserva {
         List<Administrador> administradors = administradorDAO.findByUsernameAndPassword("carloshenrique222", "123123qwqw");
         if(administradors.size() == 1){
             System.out.println("Sucesso!");
+            Administrador.logado = administradors.get(0);
         } else {
             System.out.println("ERRO!");
         }

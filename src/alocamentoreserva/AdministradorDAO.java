@@ -145,5 +145,39 @@ public class AdministradorDAO {
     private void carregarVO(Administrador dto, ResultSet rs)throws SQLException{
         dto.id = rs.getInt("id");
         dto.nome = rs.getString("nome");
+//        dto.nomeDeUsuario = rs.getString("nome_de_usuario");
+//        dto.senha = rs.getString("senha_hash");
+    }
+
+    // será que precisa desses 2 parametros?
+    void alterar(Administrador administradorLogado, Administrador administradorClone) {
+        try {
+            sql = "update administrador set nome = ?, senha_hash = ?, nome_de_usuario = ? where id = ?;";
+            
+            stmt = conexao.Conexao.getCon().prepareStatement(sql);
+            
+            stmt.setInt(4, administradorLogado.id);
+            
+            stmt.setString(1, administradorClone.nome);
+            stmt.setString(3, administradorClone.nomeDeUsuario);
+            
+            try {
+                MessageDigest m = MessageDigest.getInstance("MD5");
+                byte message[] = m.digest(administradorClone.senha.getBytes("UTF-8"));
+                String messageDString = new String(message, "UTF-8");
+                System.out.println(messageDString);
+                stmt.setString(2, messageDString);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConexaoException ex) {
+            Logger.getLogger(AdministradorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
