@@ -5,6 +5,7 @@
  */
 package alocamentoreserva;
 
+import conexao.ConexaoException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,13 +28,14 @@ public class ProfessorDAO {
     Professor usuarioResultado;
     List<Professor> usuarioResultados;
     
-    public void inserir(Professor usuario) throws conexao.ConexaoException{
+    public void inserir(Professor professor) throws conexao.ConexaoException{
         try {
-            sql = "insert into usuario (nome) values (?);";
+            sql = "insert into professor (nome, codigo_barras) values (?, ?);";
             
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             
-            stmt.setString(1, usuario.nome);
+            stmt.setString(1, professor.nome);
+            stmt.setString(2, professor.codigoBarras);
             
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -59,7 +61,7 @@ public class ProfessorDAO {
     
     public List<Professor> findLast() throws conexao.ConexaoException{
         try {
-            sql = "select * from usuario order by id desc limit 1;";
+            sql = "select * from professor order by id desc limit 1;";
 
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             
@@ -97,5 +99,25 @@ public class ProfessorDAO {
     private void carregarVO(Professor dto, ResultSet rs)throws SQLException{
         dto.id = rs.getInt("id");
         dto.nome = rs.getString("nome");
+    }
+
+    public List<Professor> findByCodigoBarras(String codigoDeBarras) {
+        try {
+            sql = "select * from professor where codigo_barras = ?;";
+
+            stmt = conexao.Conexao.getCon().prepareStatement(sql);
+            
+            stmt.setString(1, codigoDeBarras);
+            
+            rs = stmt.executeQuery();
+            
+            return carregarMultiplosResultados(rs);
+        }catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+        } catch (ConexaoException ex) { 
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
     }
 }

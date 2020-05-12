@@ -12,4 +12,5 @@ package alocamentoreserva;
 public class Ambiente {
     int id;
     String codigo;
+    String codigoBarras;
 }

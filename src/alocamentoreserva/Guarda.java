@@ -10,6 +10,9 @@ package alocamentoreserva;
  * @author admin
  */
 public class Guarda {
+    public static Guarda logado;
+    public static Guarda selecionado;
+    
     int id;
     
     String nome;

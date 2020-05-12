@@ -31,7 +31,7 @@ public class ReservaDAO {
     public void inserir(Reserva reserva) throws conexao.ConexaoException{
         try {
             //sql = "insert into reserva (data_horario_ini) values (?);";
-            sql = "insert into reserva (data_horario_ini, usuario_id) values (?, ?);";
+            sql = "insert into reserva (data_horario_ini, data_horario_fim, professor_id, ambiente_id) values (?, ?, ?, ?);";
             
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             
@@ -39,10 +39,12 @@ public class ReservaDAO {
              new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             
             String dataHorarioIniString = sdf.format(reserva.dataHorarioIni);
+            String dataHorarioFimString = sdf.format(reserva.dataHorarioFim);
             
             stmt.setString(1, dataHorarioIniString);
-            
-            stmt.setInt(2, reserva.usuario.id);
+            stmt.setString(2, dataHorarioIniString);   
+            stmt.setInt(3, reserva.professor.id);
+            stmt.setInt(4, reserva.ambiente.id);
             
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -50,9 +52,9 @@ public class ReservaDAO {
         }
     }
     
-    public List<Professor> findAll() throws conexao.ConexaoException{
+    public List<Reserva> findAll() throws conexao.ConexaoException{
         try {
-            sql = "select * from usuario order by id;";
+            sql = "select * from reserva order by id;";
 
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             
@@ -102,8 +104,8 @@ public class ReservaDAO {
         dto.id = rs.getInt("reserva.id");
         Date dataUtil = new java.util.Date(rs.getDate("reserva.data_horario_ini").getTime());
         dto.dataHorarioIni = dataUtil;
-        dto.usuario = new Professor();
-        dto.usuario.id = rs.getInt("usuario.id");
-        dto.usuario.nome = rs.getString("usuario.nome");
+        dto.professor = new Professor();
+        dto.professor.id = rs.getInt("usuario.id");
+        dto.professor.nome = rs.getString("usuario.nome");
     }
 }

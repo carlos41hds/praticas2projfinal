@@ -13,21 +13,20 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class GuardaCadastrarPainel extends javax.swing.JPanel {
-    GuardaDAO guardaDAO = new GuardaDAO();
-    Guarda guarda = new Guarda();
+public class AmbienteCadastrarPainel extends javax.swing.JPanel {
+    AmbienteDAO ambienteDAO = new AmbienteDAO();
+    Ambiente ambiente = new Ambiente();
     /**
      * Creates new form ContaAdministradorPainel
      */
-    public GuardaCadastrarPainel() {
+    public AmbienteCadastrarPainel() {
         initComponents();
     }
     
-    public void guardaLoad(){
-        idTextField.setText( Integer.toString( guarda.id ) );
-        nomeTextField.setText( guarda.nome );
-        nomeDeUsuarioTextField.setText( guarda.nomeDeUsuario );
-        senhaTextField.setText( guarda.senha );
+    public void ambienteLoad(){
+        idTextField.setText( Integer.toString( ambiente.id ) );
+        codigoDeBarrasTextField.setText( ambiente.codigoBarras );
+        codigoTextField.setText( ambiente.codigo );
     }
 
     /**
@@ -40,25 +39,21 @@ public class GuardaCadastrarPainel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        nomeTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        senhaTextField = new javax.swing.JTextField();
+        codigoTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        nomeDeUsuarioTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        codigoDeBarrasTextField = new javax.swing.JTextField();
+        cadastrarButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         idTextField = new javax.swing.JTextField();
 
-        jLabel1.setText("Nome: ");
+        jLabel1.setText("Código:");
 
-        jLabel2.setText("Senha");
+        jLabel3.setText("Código de barras");
 
-        jLabel3.setText("Nome de usuário");
-
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cadastrarButton.setText("Cadastrar");
+        cadastrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cadastrarButtonActionPerformed(evt);
             }
         });
 
@@ -73,25 +68,21 @@ public class GuardaCadastrarPainel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cadastrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(senhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(nomeDeUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(codigoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(38, 38, 38)
+                                .addComponent(codigoDeBarrasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -105,51 +96,41 @@ public class GuardaCadastrarPainel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codigoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(nomeDeUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(senhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codigoDeBarrasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(cadastrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
         try {
             // TODO add your handling code here:
-            guarda.nomeDeUsuario = nomeDeUsuarioTextField.getText();
-            guarda.nome = nomeTextField.getText();
-            guarda.senha = senhaTextField.getText();
+            ambiente.codigoBarras = codigoDeBarrasTextField.getText();
+            ambiente.codigo = codigoTextField.getText();
             
-            guardaDAO.inserir(guarda);
+            ambienteDAO.inserir(ambiente);
             
-            Guarda guardaTemp = guardaDAO.findLast().get(0);
-            guarda.id = guardaTemp.id;
-            guarda.nome = guardaTemp.nome;
-            guarda.nomeDeUsuario = guardaTemp.nomeDeUsuario;
+            ambiente = ambienteDAO.findLast().get(0);
             
-            guardaLoad();
+            ambienteLoad();
         } catch (ConexaoException ex) {
-            Logger.getLogger(GuardaCadastrarPainel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AmbienteCadastrarPainel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cadastrarButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cadastrarButton;
+    private javax.swing.JTextField codigoDeBarrasTextField;
+    private javax.swing.JTextField codigoTextField;
     private javax.swing.JTextField idTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField nomeDeUsuarioTextField;
-    private javax.swing.JTextField nomeTextField;
-    private javax.swing.JTextField senhaTextField;
     // End of variables declaration//GEN-END:variables
 }

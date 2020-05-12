@@ -14,11 +14,11 @@ import javax.swing.JPanel;
  *
  * @author Admin
  */
-public class JanelaPrincipal extends javax.swing.JFrame {
+public class JanelaPrincipal2 extends javax.swing.JFrame {
     /**
      * Creates new form JanelaPrincipal
      */
-    public JanelaPrincipal() {
+    public JanelaPrincipal2() {
         initComponents();
     }
 
@@ -46,14 +46,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        usuarioCadastrarMenuItem = new javax.swing.JMenuItem();
-        usuarioBuscarMenuItem = new javax.swing.JMenuItem();
+        professorCadastrarMenuItem = new javax.swing.JMenuItem();
+        professorBuscarMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         reservaCadastrarMenuItem = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        guardaCadastrarMenuItem = new javax.swing.JMenuItem();
-        guardaBuscarMenuItem = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         contaAlterarMenuItem = new javax.swing.JMenuItem();
 
@@ -67,27 +66,39 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Iniciar");
 
-        jMenu4.setText("Usuario");
+        jMenu4.setText("Professor");
 
-        usuarioCadastrarMenuItem.setText("Cadastrar");
-        usuarioCadastrarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        professorCadastrarMenuItem.setText("Cadastrar");
+        professorCadastrarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioCadastrarMenuItemActionPerformed(evt);
+                professorCadastrarMenuItemActionPerformed(evt);
             }
         });
-        jMenu4.add(usuarioCadastrarMenuItem);
+        jMenu4.add(professorCadastrarMenuItem);
 
-        usuarioBuscarMenuItem.setText("Buscar");
-        usuarioBuscarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        professorBuscarMenuItem.setText("Buscar");
+        professorBuscarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioBuscarMenuItemActionPerformed(evt);
+                professorBuscarMenuItemActionPerformed(evt);
             }
         });
-        jMenu4.add(usuarioBuscarMenuItem);
+        jMenu4.add(professorBuscarMenuItem);
 
         jMenu1.add(jMenu4);
 
         jMenu2.setText("Ambiente");
+
+        jMenuItem2.setText("Cadastrar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Buscar");
+        jMenu2.add(jMenuItem3);
+
         jMenu1.add(jMenu2);
 
         jMenu5.setText("Reserva");
@@ -101,26 +112,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenu5.add(reservaCadastrarMenuItem);
 
         jMenu1.add(jMenu5);
-
-        jMenu7.setText("Guarda");
-
-        guardaCadastrarMenuItem.setText("Cadastrar");
-        guardaCadastrarMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardaCadastrarMenuItemActionPerformed(evt);
-            }
-        });
-        jMenu7.add(guardaCadastrarMenuItem);
-
-        guardaBuscarMenuItem.setText("Buscar");
-        guardaBuscarMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardaBuscarMenuItemActionPerformed(evt);
-            }
-        });
-        jMenu7.add(guardaBuscarMenuItem);
-
-        jMenu1.add(jMenu7);
 
         jMenu6.setText("Conta");
 
@@ -152,13 +143,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usuarioCadastrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioCadastrarMenuItemActionPerformed
+    private void professorCadastrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorCadastrarMenuItemActionPerformed
+        trocarPainel(new ProfessorCadastrarPainel());
+    }//GEN-LAST:event_professorCadastrarMenuItemActionPerformed
 
-    }//GEN-LAST:event_usuarioCadastrarMenuItemActionPerformed
-
-    private void usuarioBuscarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioBuscarMenuItemActionPerformed
+    private void professorBuscarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorBuscarMenuItemActionPerformed
         trocarPainel(new ProfessorBuscarPainel());
-    }//GEN-LAST:event_usuarioBuscarMenuItemActionPerformed
+    }//GEN-LAST:event_professorBuscarMenuItemActionPerformed
 
     private void reservaCadastrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservaCadastrarMenuItemActionPerformed
         trocarPainel(new ReservaCadastrarPainel());
@@ -169,35 +160,28 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         trocarPainel(new ContaAdministradorPainel());
     }//GEN-LAST:event_contaAlterarMenuItemActionPerformed
 
-    private void guardaCadastrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardaCadastrarMenuItemActionPerformed
-        // TODO add your handling code here:
-        trocarPainel(new GuardaCadastrarPainel());
-    }//GEN-LAST:event_guardaCadastrarMenuItemActionPerformed
-
-    private void guardaBuscarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardaBuscarMenuItemActionPerformed
-        // TODO add your handling code here:
-        trocarPainel(new GuardaBuscarPainel());
-    }//GEN-LAST:event_guardaBuscarMenuItemActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        trocarPainel(new AmbienteCadastrarPainel());
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void vendaCadastrarBtActionPerformedOrFail(java.awt.event.ActionEvent evt) {                                                 
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem contaAlterarMenuItem;
-    private javax.swing.JMenuItem guardaBuscarMenuItem;
-    private javax.swing.JMenuItem guardaCadastrarMenuItem;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel painelPrincipal;
+    private javax.swing.JMenuItem professorBuscarMenuItem;
+    private javax.swing.JMenuItem professorCadastrarMenuItem;
     private javax.swing.JMenuItem reservaCadastrarMenuItem;
-    private javax.swing.JMenuItem usuarioBuscarMenuItem;
-    private javax.swing.JMenuItem usuarioCadastrarMenuItem;
     // End of variables declaration//GEN-END:variables
 }

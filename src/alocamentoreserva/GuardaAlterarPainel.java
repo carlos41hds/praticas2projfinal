@@ -13,14 +13,18 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class GuardaCadastrarPainel extends javax.swing.JPanel {
+public class GuardaAlterarPainel extends javax.swing.JPanel {
     GuardaDAO guardaDAO = new GuardaDAO();
-    Guarda guarda = new Guarda();
+    Guarda guarda;
     /**
      * Creates new form ContaAdministradorPainel
      */
-    public GuardaCadastrarPainel() {
+    public GuardaAlterarPainel() {
         initComponents();
+        
+        guarda = Guarda.selecionado;
+        
+        guardaLoad();
     }
     
     public void guardaLoad(){
@@ -55,7 +59,7 @@ public class GuardaCadastrarPainel extends javax.swing.JPanel {
 
         jLabel3.setText("Nome de usuário");
 
-        jButton1.setText("Cadastrar");
+        jButton1.setText("Alterar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -121,23 +125,12 @@ public class GuardaCadastrarPainel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            // TODO add your handling code here:
-            guarda.nomeDeUsuario = nomeDeUsuarioTextField.getText();
-            guarda.nome = nomeTextField.getText();
-            guarda.senha = senhaTextField.getText();
-            
-            guardaDAO.inserir(guarda);
-            
-            Guarda guardaTemp = guardaDAO.findLast().get(0);
-            guarda.id = guardaTemp.id;
-            guarda.nome = guardaTemp.nome;
-            guarda.nomeDeUsuario = guardaTemp.nomeDeUsuario;
-            
-            guardaLoad();
-        } catch (ConexaoException ex) {
-            Logger.getLogger(GuardaCadastrarPainel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // TODO add your handling code here:
+        guarda.nomeDeUsuario = nomeDeUsuarioTextField.getText();
+        guarda.nome = nomeTextField.getText();
+        guarda.senha = senhaTextField.getText();
+        guardaDAO.alterar(guarda);
+        guardaLoad();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

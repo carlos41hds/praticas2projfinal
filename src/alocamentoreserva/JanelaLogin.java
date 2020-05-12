@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class JanelaLogin extends javax.swing.JFrame {
     AdministradorDAO administradorDAO = new AdministradorDAO();
+    GuardaDAO guardaDAO = new GuardaDAO();
     /**
      * Creates new form JanelaLogin
      */
@@ -105,13 +106,30 @@ public class JanelaLogin extends javax.swing.JFrame {
         if(administradors.size() == 1){
             Administrador.logado = administradors.get(0);
             
-            Administrador.logado.nomeDeUsuario = nomeDeUsuario;
+//            Administrador.logado.nomeDeUsuario = nomeDeUsuario;
             Administrador.logado.senha = senha;
             
             JanelaPrincipal jp = new JanelaPrincipal();
             jp.setVisible(true);
             this.setVisible(false);
         } else {
+            List<Guarda> guardas = guardaDAO.findByUsernameAndPassword(nomeDeUsuario, senha);
+            
+            if(guardas.size() == 1){
+                Guarda.logado = guardas.get(0);
+                
+                // a princípio não precisa de nome de usuario, unico problema é a senha
+                // pois está hashada no banco de dados e tem que ser enviado o logado
+                // várias vezes pois não há sessão e tem que simular uma arquitetura
+                // cliente-servidor
+//                Guarda.logado.nomeDeUsuario = nomeDeUsuario;
+                Guarda.logado.senha = senha;
+
+                JanelaPrincipal2 jp2 = new JanelaPrincipal2();
+                jp2.setVisible(true);
+                this.setVisible(false);
+            }
+            
             System.out.println("ERRO");
         }
     }//GEN-LAST:event_entrarButtonActionPerformed
