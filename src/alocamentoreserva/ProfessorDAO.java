@@ -5,6 +5,7 @@
  */
 package alocamentoreserva;
 
+import conexao.ConexaoException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,31 +18,32 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class UsuarioDAO {
+public class ProfessorDAO {
     String sql;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
-    Usuario dto;
+    Professor dto;
     
-    Usuario usuarioResultado;
-    List<Usuario> usuarioResultados;
+    Professor usuarioResultado;
+    List<Professor> usuarioResultados;
     
-    public void inserir(Usuario usuario) throws conexao.ConexaoException{
+    public void inserir(Professor professor) throws conexao.ConexaoException{
         try {
-            sql = "insert into usuario (nome) values (?);";
+            sql = "insert into professor (nome, codigo_barras) values (?, ?);";
             
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             
-            stmt.setString(1, usuario.nome);
+            stmt.setString(1, professor.nome);
+            stmt.setString(2, professor.codigoBarras);
             
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public List<Usuario> findAll() throws conexao.ConexaoException{
+    public List<Professor> findAll() throws conexao.ConexaoException{
         try {
             sql = "select * from usuario order by id;";
 
@@ -57,9 +59,9 @@ public class UsuarioDAO {
         return null;
     }
     
-    public List<Usuario> findLast() throws conexao.ConexaoException{
+    public List<Professor> findLast() throws conexao.ConexaoException{
         try {
-            sql = "select * from usuario order by id desc limit 1;";
+            sql = "select * from professor order by id desc limit 1;";
 
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             
@@ -73,17 +75,17 @@ public class UsuarioDAO {
         return null;
     }
     
-    private List<Usuario> carregarMultiplosResultados(ResultSet rs) throws SQLException{
-        List<Usuario> resultList = new ArrayList<>();
+    private List<Professor> carregarMultiplosResultados(ResultSet rs) throws SQLException{
+        List<Professor> resultList = new ArrayList<>();
         while (rs.next()) {
-            dto = new Usuario();
+            dto = new Professor();
             carregarVO(dto, rs);
             resultList.add(dto);
         }
         return resultList;
     }
     
-    private Usuario carregarResultadoSimples(ResultSet rs) throws SQLException{
+    private Professor carregarResultadoSimples(ResultSet rs) throws SQLException{
         if (rs.next()) {
             dto = new Cliente();
             carregarVO(dto, rs);
@@ -94,8 +96,28 @@ public class UsuarioDAO {
         }
     }
     
-    private void carregarVO(Usuario dto, ResultSet rs)throws SQLException{
+    private void carregarVO(Professor dto, ResultSet rs)throws SQLException{
         dto.id = rs.getInt("id");
         dto.nome = rs.getString("nome");
+    }
+
+    public List<Professor> findByCodigoBarras(String codigoDeBarras) {
+        try {
+            sql = "select * from professor where codigo_barras = ?;";
+
+            stmt = conexao.Conexao.getCon().prepareStatement(sql);
+            
+            stmt.setString(1, codigoDeBarras);
+            
+            rs = stmt.executeQuery();
+            
+            return carregarMultiplosResultados(rs);
+        }catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+        } catch (ConexaoException ex) { 
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
     }
 }

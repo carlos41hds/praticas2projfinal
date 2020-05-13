@@ -9,12 +9,12 @@ package alocamentoreserva;
  *
  * @author admin
  */
-public class Usuario {
+public class Professor {
     int id;
     String nome;
+    String codigoBarras;
 
-    @Override
-    public String toString() {
+    public String toStringFull() {
         String usuarioString = "";
         
         usuarioString += "Id: " + id + "\n";
@@ -22,6 +22,9 @@ public class Usuario {
         
         return usuarioString;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

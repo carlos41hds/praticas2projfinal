@@ -17,7 +17,7 @@ public class Reserva {
     Date dataHorarioIni;
     Date dataHorarioFim;
     
-    Usuario usuario;
+    Professor professor;
     Ambiente ambiente;
 
     // TODO: Implementar ambiente
@@ -31,7 +31,7 @@ public class Reserva {
         if(dataHorarioFim != null)
             reservaString += "Data-horário final: " + dataHorarioFim.toString() + "\n";
         reservaString += "Usuario: " + "\n";
-        reservaString += usuario.toString();
+        reservaString += professor.toString();
         
         return reservaString;
     }

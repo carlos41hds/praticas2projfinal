@@ -9,8 +9,13 @@ package alocamentoreserva;
  *
  * @author admin
  */
-public class Ambiente {
+public class Guarda {
+    public static Guarda logado;
+    public static Guarda selecionado;
+    
     int id;
-    String codigo;
-    String codigoBarras;
+    
+    String nome;
+    String nomeDeUsuario;
+    String senha;
 }
