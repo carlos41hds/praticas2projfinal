@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  *
- * @author aluno
+ * @author authorqualquer
  */
 public class ClienteDAO {
     String sql;
