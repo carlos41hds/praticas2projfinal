@@ -12,6 +12,8 @@ import java.util.Date;
  * @author admin
  */
 public class Reserva {
+    public static Reserva selecionada;
+    
     int id;
     
     Date dataHorarioIni;

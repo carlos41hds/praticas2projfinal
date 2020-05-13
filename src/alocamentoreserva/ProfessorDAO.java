@@ -45,7 +45,7 @@ public class ProfessorDAO {
     
     public List<Professor> findAll() throws conexao.ConexaoException{
         try {
-            sql = "select * from usuario order by id;";
+            sql = "select * from professor order by id;";
 
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             

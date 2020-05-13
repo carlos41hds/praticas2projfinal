@@ -19,13 +19,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class ProfessorBuscarPainel extends javax.swing.JPanel {
-    List<Professor> professors = new ArrayList<>();
-    ProfessorDAO professorDAO = new ProfessorDAO();
+public class ReservaBuscarPainel extends javax.swing.JPanel {
+    List<Reserva> reservas = new ArrayList<>();
+    ReservaDAO reservaDAO = new ReservaDAO();
     /**
      * Creates new form VendaBuscarData
      */
-    public ProfessorBuscarPainel() {
+    public ReservaBuscarPainel() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class ProfessorBuscarPainel extends javax.swing.JPanel {
 
         pesquisarBt = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        professorTable = new javax.swing.JTable();
+        reservaTable = new javax.swing.JTable();
 
         pesquisarBt.setText("Buscar");
         pesquisarBt.addActionListener(new java.awt.event.ActionListener() {
@@ -49,31 +49,28 @@ public class ProfessorBuscarPainel extends javax.swing.JPanel {
             }
         });
 
-        professorTable.setModel(new javax.swing.table.DefaultTableModel(
+        reservaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nome"
+                "Id", "Ambiente", "Professor", "Data e hora inicial", "Data e hora final"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        professorTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        reservaTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                professorTableMousePressed(evt);
+                reservaTableMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(professorTable);
-        if (professorTable.getColumnModel().getColumnCount() > 0) {
-            professorTable.getColumnModel().getColumn(0).setResizable(false);
-        }
+        jScrollPane1.setViewportView(reservaTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,20 +79,18 @@ public class ProfessorBuscarPainel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(pesquisarBt, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(12, Short.MAX_VALUE))))
+                        .addComponent(pesquisarBt, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(pesquisarBt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -104,19 +99,27 @@ public class ProfessorBuscarPainel extends javax.swing.JPanel {
     private void pesquisarBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarBtActionPerformed
         // TODO add your handling code here:
         try {
-            professors = professorDAO.findAll();
+            reservas = reservaDAO.findAll();
 
-            DefaultTableModel model = (DefaultTableModel) professorTable.getModel();
+            DefaultTableModel model = (DefaultTableModel) reservaTable.getModel();
             model.setRowCount(0);
 
-            for(Professor professor : professors){
+            for(Reserva reserva : reservas){
                 model.addRow(new Object[]{
-                        professor.id,
-                        professor.nome,
+                        reserva.id,
+                        reserva.ambiente.codigo,
+                        reserva.professor.nome,
+                        reserva.dataHorarioIni,
+                        reserva.dataHorarioFim
+                        // senha está hashada, não faz sentido
+                        // além disso o que importa
+                        // é que o administrador possa alterar
+                        // a senha, não necessariamente conhecer ela
+//                        guarda.senha
                 });
             } 
         } catch (ConexaoException ex) {
-            Logger.getLogger(ProfessorBuscarPainel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReservaBuscarPainel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_pesquisarBtActionPerformed
 
@@ -137,24 +140,25 @@ public class ProfessorBuscarPainel extends javax.swing.JPanel {
         jframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     
-    private void professorTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorTableMousePressed
+    private void reservaTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reservaTableMousePressed
         // TODO add your handling code here:
-//        if(evt.getClickCount() == 2){
-//            try{
-//                int linhaSlc = usuarioTable.getSelectedRow();
-//
+        if(evt.getClickCount() == 2){
+            System.out.println("entrou");
+            
+            int linhaSlc = reservaTable.getSelectedRow();
+            
+            Reserva.selecionada = reservas.get(linhaSlc);
+            ( new JanelaWrapper() ).setVisible(true);
+            
 //                abrirJanela(new VendaDetalhesJanela(this, gerenciador, vendas.get(linhaSlc)));
-//                
-//            } catch (ConexaoException ex) {
-//                Logger.getLogger(DepositoPainel.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-    }//GEN-LAST:event_professorTableMousePressed
+//
+        }
+    }//GEN-LAST:event_reservaTableMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton pesquisarBt;
-    private javax.swing.JTable professorTable;
+    private javax.swing.JTable reservaTable;
     // End of variables declaration//GEN-END:variables
 }

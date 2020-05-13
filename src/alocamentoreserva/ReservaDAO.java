@@ -54,7 +54,13 @@ public class ReservaDAO {
     
     public List<Reserva> findAll() throws conexao.ConexaoException{
         try {
-            sql = "select * from reserva order by id;";
+            sql = "select reserva.id, reserva.data_horario_ini, reserva.data_horario_fim,"
+                + " professor.id, professor.nome, professor.codigo_barras, "
+                + " ambiente.id, ambiente.codigo, ambiente.codigo_barras "
+                + " from ( reserva inner join professor on reserva.professor_id = professor.id )"
+                + " inner join ambiente on reserva.ambiente_id = ambiente.id order"
+                + " by reserva.id;";
+
 
             stmt = conexao.Conexao.getCon().prepareStatement(sql);
             
@@ -101,11 +107,20 @@ public class ReservaDAO {
     }
     
     private void carregarVOWithUsuario(Reserva dto, ResultSet rs)throws SQLException{
+        Date dataUtil;
         dto.id = rs.getInt("reserva.id");
-        Date dataUtil = new java.util.Date(rs.getDate("reserva.data_horario_ini").getTime());
+        dataUtil = new java.util.Date(rs.getTimestamp("reserva.data_horario_ini").getTime());
         dto.dataHorarioIni = dataUtil;
+        dataUtil = new java.util.Date(rs.getTimestamp("reserva.data_horario_fim").getTime());
+        dto.dataHorarioFim = dataUtil;
+        
         dto.professor = new Professor();
-        dto.professor.id = rs.getInt("usuario.id");
-        dto.professor.nome = rs.getString("usuario.nome");
+        dto.professor.id = rs.getInt("professor.id");
+        dto.professor.nome = rs.getString("professor.nome");
+        
+        dto.ambiente = new Ambiente();
+        dto.ambiente.id = rs.getInt("ambiente.id");
+        dto.ambiente.codigo = rs.getString("ambiente.codigo");
+        
     }
 }

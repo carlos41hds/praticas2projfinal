@@ -53,6 +53,7 @@ public class JanelaPrincipal2 extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         reservaCadastrarMenuItem = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         contaAlterarMenuItem = new javax.swing.JMenuItem();
 
@@ -111,6 +112,14 @@ public class JanelaPrincipal2 extends javax.swing.JFrame {
         });
         jMenu5.add(reservaCadastrarMenuItem);
 
+        jMenuItem4.setText("Buscar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem4);
+
         jMenu1.add(jMenu5);
 
         jMenu6.setText("Conta");
@@ -164,6 +173,10 @@ public class JanelaPrincipal2 extends javax.swing.JFrame {
         trocarPainel(new AmbienteCadastrarPainel());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        trocarPainel(new ReservaBuscarPainel());
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     private void vendaCadastrarBtActionPerformedOrFail(java.awt.event.ActionEvent evt) {                                                 
     }
     
@@ -179,6 +192,7 @@ public class JanelaPrincipal2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel painelPrincipal;
     private javax.swing.JMenuItem professorBuscarMenuItem;
     private javax.swing.JMenuItem professorCadastrarMenuItem;
