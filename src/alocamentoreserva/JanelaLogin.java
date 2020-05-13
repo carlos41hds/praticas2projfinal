@@ -7,8 +7,8 @@ package alocamentoreserva;
 
 /**
  *
- * @author admin
- */
+ * @author o autor sou eu
+ */ 
 public class JanelaLogin extends javax.swing.JFrame {
 
     /**
